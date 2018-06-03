@@ -1,0 +1,13 @@
+This program helps the user to learn. She writes links to courses that have been ranked in top 10 best-recommended courses before going to school.
+
+How does it work?
+
+At first, there is congratulation to the user; a user poll is next followed by the course he is looking for, etc. The user has to choose how to check the information received, either by the method provided by the udemy API or by the one that is implemented by the authors of the program. After that, the information about the courses and links with the serial number is recorded in the file.
+
+What is the difference between ways of processing information?
+
+Firstly, the method of data analysis using udemy API is not accurate, because when testing API it turned out that some of the query parameters are not working correctly, for example, the price does not affect the price. Therefore, it is worth not using this method if you want to get accurate data.
+
+Secondly, the built-in method works for a long time, at least 3 minutes, since in 40 seconds only ten requests can be sent. Also, some losses are possible, as, for the program optimization problem, the program can check 30 courses.
+
+If you want a quick check, choose the first method, if you want a precise check, then choose the second method.
