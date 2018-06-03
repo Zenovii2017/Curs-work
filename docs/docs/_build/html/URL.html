@@ -1,0 +1,274 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>URL package &#8212; Curs work  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="checker package" href="checker.html" />
+    <link rel="prev" title="Data package" href="Data.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="url-package">
+<h1>URL package<a class="headerlink" href="#url-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-URL.make_url">
+<span id="url-make-url-module"></span><h2>URL.make_url module<a class="headerlink" href="#module-URL.make_url" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="URL.make_url.long_make_url">
+<code class="descclassname">URL.make_url.</code><code class="descname">long_make_url</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/make_url.html#long_make_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.make_url.long_make_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>its function is for make url if you choose udemy way
+:param url: str
+:return: str</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="URL.make_url.short_make_url">
+<code class="descclassname">URL.make_url.</code><code class="descname">short_make_url</code><span class="sig-paren">(</span><em>ident=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/make_url.html#short_make_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.make_url.short_make_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>make url with input data user
+:return: str</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-URL.url">
+<span id="url-url-module"></span><h2>URL.url module<a class="headerlink" href="#module-URL.url" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="URL.url.URL">
+<em class="property">class </em><code class="descclassname">URL.url.</code><code class="descname">URL</code><a class="reference internal" href="_modules/URL/url.html#URL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>class that represents url class
+have methods:</p>
+<blockquote>
+<div>add_category() - add to url category of course
+add_subcategory() - add to url subcategory of course
+price() - add to url price
+is_affiliate_agreed() - add to url true or false depend on affiliate
+agreed
+is_fixed_priced_deals_agreed() -  add to url true or false depend on
+price
+is_percentage_deals_agreed() - add to url true or false depend on price
+language() - add to url setting language
+has_simple_quiz() -  add to url true or false depend on simple quiz
+has_closed_caption() -  add to url true or false depend on closed
+caption
+has_coding_exercises() - add to url true or false depend on ident
+url() - return url that represent courses list
+instructional_level() - check what is level of course
+ordering() - check what order has course</div></blockquote>
+<dl class="method">
+<dt id="URL.url.URL.add_category">
+<code class="descname">add_category</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#URL.add_category"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL.add_category" title="Permalink to this definition">¶</a></dt>
+<dd><p>add to url category of course
+:param text: str
+:return: None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="URL.url.URL.add_subcategory">
+<code class="descname">add_subcategory</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#URL.add_subcategory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL.add_subcategory" title="Permalink to this definition">¶</a></dt>
+<dd><p>add to url subcategory of course
+:param text: str
+:return: None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="URL.url.URL.has_closed_caption">
+<code class="descname">has_closed_caption</code><span class="sig-paren">(</span><em>ident</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#URL.has_closed_caption"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL.has_closed_caption" title="Permalink to this definition">¶</a></dt>
+<dd><p>add to url true or false depend on closed caption
+:param ident: bool
+:return: None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="URL.url.URL.has_coding_exercises">
+<code class="descname">has_coding_exercises</code><span class="sig-paren">(</span><em>ident</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#URL.has_coding_exercises"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL.has_coding_exercises" title="Permalink to this definition">¶</a></dt>
+<dd><p>add to url true or false depend on ident
+:param ident: bool
+:return: None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="URL.url.URL.has_simple_quiz">
+<code class="descname">has_simple_quiz</code><span class="sig-paren">(</span><em>ident</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#URL.has_simple_quiz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL.has_simple_quiz" title="Permalink to this definition">¶</a></dt>
+<dd><p>add to url true or false depend on simple quiz
+:param ident: bool
+:return: None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="URL.url.URL.instructional_level">
+<code class="descname">instructional_level</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#URL.instructional_level"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL.instructional_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>check what is level of course
+:param text: str
+:return: None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="URL.url.URL.is_affiliate_agreed">
+<code class="descname">is_affiliate_agreed</code><span class="sig-paren">(</span><em>ident</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#URL.is_affiliate_agreed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL.is_affiliate_agreed" title="Permalink to this definition">¶</a></dt>
+<dd><p>add to url true or false depend on affiliate
+:param ident: bool
+:return: None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="URL.url.URL.is_fixed_priced_deals_agreed">
+<code class="descname">is_fixed_priced_deals_agreed</code><span class="sig-paren">(</span><em>ident</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#URL.is_fixed_priced_deals_agreed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL.is_fixed_priced_deals_agreed" title="Permalink to this definition">¶</a></dt>
+<dd><p>add to url true or false depend on price
+:param ident: bool
+:return: None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="URL.url.URL.is_percentage_deals_agreed">
+<code class="descname">is_percentage_deals_agreed</code><span class="sig-paren">(</span><em>ident</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#URL.is_percentage_deals_agreed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL.is_percentage_deals_agreed" title="Permalink to this definition">¶</a></dt>
+<dd><p>add to url true or false depend on price
+:param ident: bool
+:return: None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="URL.url.URL.language">
+<code class="descname">language</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#URL.language"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL.language" title="Permalink to this definition">¶</a></dt>
+<dd><p>add to url setting language
+:param text: str
+:return: None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="URL.url.URL.ordering">
+<code class="descname">ordering</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#URL.ordering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL.ordering" title="Permalink to this definition">¶</a></dt>
+<dd><p>check what order has course
+:param text: str
+:return: str</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="URL.url.URL.price">
+<code class="descname">price</code><span class="sig-paren">(</span><em>ident</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#URL.price"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL.price" title="Permalink to this definition">¶</a></dt>
+<dd><p>add to url price
+:param ident: bool
+:return: None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="URL.url.URL.url">
+<code class="descname">url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#URL.url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.URL.url" title="Permalink to this definition">¶</a></dt>
+<dd><p>return url
+:return: str</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="URL.url.curriculum_url">
+<em class="property">class </em><code class="descclassname">URL.url.</code><code class="descname">curriculum_url</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#curriculum_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.curriculum_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="docutils">
+<dt>class that represent curriculum url.Have methods:</dt>
+<dd>curriculum_url() - return url that represents curriculum list</dd>
+</dl>
+<dl class="method">
+<dt id="URL.url.curriculum_url.currric_url">
+<code class="descname">currric_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/URL/url.html#curriculum_url.currric_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#URL.url.curriculum_url.currric_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>return url that represents curriculum list
+:return: str</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-URL">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-URL" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">URL package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-URL.make_url">URL.make_url module</a></li>
+<li><a class="reference internal" href="#module-URL.url">URL.url module</a></li>
+<li><a class="reference internal" href="#module-URL">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Data.html" title="previous chapter">Data package</a></li>
+      <li>Next: <a href="checker.html" title="next chapter">checker package</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/URL.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.0+</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/URL.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

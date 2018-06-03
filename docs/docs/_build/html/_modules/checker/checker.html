@@ -1,0 +1,187 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>checker.checker &#8212; Curs work  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for checker.checker</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">file.read</span> <span class="k">import</span> <span class="n">read_from_file</span><span class="p">,</span> <span class="n">special_read_language_list</span>
+<span class="kn">from</span> <span class="nn">Data.get_data</span> <span class="k">import</span> <span class="n">get_curriculum_items</span>
+
+
+<div class="viewcode-block" id="easy_checker"><a class="viewcode-back" href="../../checker.html#checker.checker.easy_checker">[docs]</a><span class="k">def</span> <span class="nf">easy_checker</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">open_file</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    check if in list categories is input category or not. if not it check if</span>
+<span class="sd">    input category is similar to at least one of the list. And returned similar</span>
+<span class="sd">    to input.</span>
+<span class="sd">    :param category: str</span>
+<span class="sd">    :param open_file: str</span>
+<span class="sd">    :return: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">open_file</span> <span class="o">=</span> <span class="n">read_from_file</span><span class="p">(</span><span class="n">open_file</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">open_file</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">category</span>
+
+    <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">open_file</span><span class="p">:</span>
+        <span class="n">coefficient</span> <span class="o">=</span> <span class="n">short_Jacquard_algorithm</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">lst</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">coefficient</span><span class="p">,</span> <span class="n">word</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">coefficient</span><span class="p">:</span>
+                <span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">coefficient</span><span class="p">,</span> <span class="n">word</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="check"><a class="viewcode-back" href="../../checker.html#checker.checker.check">[docs]</a><span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    start checking list with courses on input parametrs</span>
+<span class="sd">    :param data: list</span>
+<span class="sd">    :return: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please write or copy themes subject in file &#39;theme.txt&#39;&quot;</span><span class="p">)</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+        <span class="s2">&quot;If you write it, please input something. Your answer: &quot;</span><span class="p">)</span>
+    <span class="n">new_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">course</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">get_data</span> <span class="o">=</span> <span class="n">get_curriculum_items</span><span class="p">(</span><span class="n">course</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span>
+        <span class="n">get_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">course</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">],</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">course</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]})</span>
+        <span class="n">new_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_data</span><span class="p">)</span>
+    <span class="n">opened_file</span> <span class="o">=</span> <span class="n">read_from_file</span><span class="p">(</span><span class="s2">&quot;theme.txt&quot;</span><span class="p">)</span>
+    <span class="n">returned_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">theme</span> <span class="ow">in</span> <span class="n">opened_file</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">course</span> <span class="ow">in</span> <span class="n">new_data</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">course_data</span> <span class="ow">in</span> <span class="n">course</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">short_Jacquard_algorithm</span><span class="p">(</span><span class="n">course_data</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">],</span>
+                                                <span class="n">theme</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0.7</span> <span class="ow">and</span> \
+                            <span class="n">course</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">returned_data</span><span class="p">:</span>
+                        <span class="n">returned_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">course</span><span class="p">)</span>
+                        <span class="k">break</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">returned_data</span></div>
+
+
+<div class="viewcode-block" id="short_Jacquard_algorithm"><a class="viewcode-back" href="../../checker.html#checker.checker.short_Jacquard_algorithm">[docs]</a><span class="k">def</span> <span class="nf">short_Jacquard_algorithm</span><span class="p">(</span><span class="n">text1</span><span class="p">,</span> <span class="n">text2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    analyze two texts</span>
+<span class="sd">    It use a Jacquard algorithm? it means it delete all digits and punctuation</span>
+<span class="sd">    delete repeated letters</span>
+<span class="sd">    :param text1: str</span>
+<span class="sd">    :param text2: str</span>
+<span class="sd">    :return: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">make_new_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+        <span class="n">new_text</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">letter</span><span class="o">.</span><span class="n">isalpha</span><span class="p">():</span>
+                <span class="n">new_text</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">letter</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">new_text</span>
+
+    <span class="n">new_text1</span> <span class="o">=</span> <span class="n">make_new_text</span><span class="p">(</span><span class="n">text1</span><span class="p">)</span>
+    <span class="n">new_text2</span> <span class="o">=</span> <span class="n">make_new_text</span><span class="p">(</span><span class="n">text2</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_text1</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_text2</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">new_text1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">new_text2</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">coefficient</span> <span class="o">=</span> <span class="n">c</span> <span class="o">/</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">coefficient</span></div>
+
+
+<div class="viewcode-block" id="search_language"><a class="viewcode-back" href="../../checker.html#checker.checker.search_language">[docs]</a><span class="k">def</span> <span class="nf">search_language</span><span class="p">(</span><span class="n">language</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    search language in dict and then return language in iso 639.2</span>
+<span class="sd">    :param language: str</span>
+<span class="sd">    :return: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">open_file</span> <span class="o">=</span> <span class="n">special_read_language_list</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">language</span> <span class="ow">in</span> <span class="n">open_file</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">open_file</span><span class="p">[</span><span class="n">language</span><span class="p">]</span>
+    <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">open_file</span><span class="p">:</span>
+        <span class="n">coefficient</span> <span class="o">=</span> <span class="n">short_Jacquard_algorithm</span><span class="p">(</span><span class="n">language</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">lst</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">coefficient</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">coefficient</span><span class="p">:</span>
+                <span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">coefficient</span><span class="p">,</span> <span class="n">open_file</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.0+</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,265 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>URL.make_url &#8212; Curs work  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for URL.make_url</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">checker.checker</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">URL.url</span> <span class="k">import</span> <span class="n">URL</span>
+<span class="kn">from</span> <span class="nn">file.read</span> <span class="k">import</span> <span class="n">read_from_file</span>
+
+
+<div class="viewcode-block" id="short_make_url"><a class="viewcode-back" href="../../URL.html#URL.make_url.short_make_url">[docs]</a><span class="k">def</span> <span class="nf">short_make_url</span><span class="p">(</span><span class="n">ident</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    make url with input data user</span>
+<span class="sd">    :return: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">URL</span><span class="p">()</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you need to see list with category?</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;List with all categories: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+              <span class="n">read_from_file</span><span class="p">(</span><span class="s2">&quot;CourseCategory.txt&quot;</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;if you dont want input category dont input anything.&quot;</span><span class="p">)</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Please input category of course: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">category</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">ident</span><span class="p">:</span>
+        <span class="n">new_category</span> <span class="o">=</span> <span class="n">easy_checker</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="s2">&quot;CourseCategory.txt&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ident</span><span class="p">:</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">new_category</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entered category not found.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You must input category&quot;</span><span class="p">)</span>
+                <span class="n">category</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Please input category of course: &quot;</span><span class="p">)</span>
+                <span class="n">new_category</span> <span class="o">=</span> <span class="n">easy_checker</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="s2">&quot;CourseCategory.txt&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">new_category</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">url</span><span class="o">.</span><span class="n">add_category</span><span class="p">(</span><span class="n">new_category</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">new_category</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entered category not found.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">category</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Please input category of course: &quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">category</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">new_category</span> <span class="o">=</span> <span class="n">easy_checker</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="s2">&quot;CourseCategory.txt&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">category</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">url</span><span class="o">.</span><span class="n">add_category</span><span class="p">(</span><span class="n">new_category</span><span class="p">)</span>
+
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do you need to see list with subcategory?</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;List with all subcategories: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+              <span class="n">read_from_file</span><span class="p">(</span><span class="s2">&quot;CourseSubcategory.txt&quot;</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;if you dont want input subcategory dont input anything.&quot;</span><span class="p">)</span>
+    <span class="n">subcategory</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Please input subcategory of course: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">subcategory</span><span class="p">:</span>
+        <span class="n">new_subcategory</span> <span class="o">=</span> <span class="n">easy_checker</span><span class="p">(</span><span class="n">subcategory</span><span class="p">,</span> <span class="s2">&quot;CourseSubcategory.txt&quot;</span><span class="p">)</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">new_subcategory</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entered subcategory not found.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">subcategory</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Please input subcategory of course: &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">subcategory</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">new_subcategory</span> <span class="o">=</span> <span class="n">easy_checker</span><span class="p">(</span><span class="n">subcategory</span><span class="p">,</span>
+                                           <span class="s2">&quot;CourseSubcategory.txt&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">subcategory</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="n">url</span><span class="o">.</span><span class="n">add_subcategory</span><span class="p">(</span><span class="n">new_subcategory</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ident</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">long_make_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">url</span></div>
+
+
+<div class="viewcode-block" id="long_make_url"><a class="viewcode-back" href="../../URL.html#URL.make_url.long_make_url">[docs]</a><span class="k">def</span> <span class="nf">long_make_url</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    its function is for make url if you choose udemy way</span>
+<span class="sd">    :param url: str</span>
+<span class="sd">    :return: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;If you dont want input answer to some question then press Enter!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+        <span class="s2">&quot;If you want get courses with affiliate agreed, input yes: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">is_affiliate_agreed</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">is_affiliate_agreed</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+        <span class="s2">&quot;If you want get courses with fixed price, input yes: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">is_fixed_priced_deals_agreed</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">is_fixed_priced_deals_agreed</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+        <span class="s2">&quot;If you want get courses with percentage deals agreed, input yes: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">is_fixed_priced_deals_agreed</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">is_fixed_priced_deals_agreed</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;Next if you want you can input language, but this works very bad beca&quot;</span>
+        <span class="s2">&quot;use program read your input language and then search it in dict and &quot;</span>
+        <span class="s2">&quot;then return language in iso 639.2</span><span class="se">\n</span><span class="s2">and program can make mistake. &quot;</span>
+        <span class="s2">&quot;Because of that it much better if you dont input language.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Input language that you need: &quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">input_language</span> <span class="o">=</span> <span class="n">search_language</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">input_language</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">language</span><span class="p">(</span><span class="n">input_language</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">input_language</span><span class="p">:</span>
+                <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Input language that you need: &quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">input_language</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">input_language</span> <span class="o">=</span> <span class="n">search_language</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">input_language</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">url</span><span class="o">.</span><span class="n">language</span><span class="p">(</span><span class="n">input_language</span><span class="p">)</span>
+
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+        <span class="s2">&quot;If you want get courses with small simple quiz, input yes: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">has_simple_quiz</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">has_simple_quiz</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+        <span class="s2">&quot;If you want get courses with closed caption, input yes: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">has_closed_caption</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">has_closed_caption</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+        <span class="s2">&quot;If you want get courses with coding exercises, input yes: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">has_coding_exercises</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">has_coding_exercises</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+        <span class="s2">&quot;If you want see all instructional levels, input yes: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">read_from_file</span><span class="p">(</span><span class="s2">&quot;instructional_level.txt&quot;</span><span class="p">))</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+        <span class="s2">&quot;Input your instructial level: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">answer</span> <span class="o">=</span> <span class="n">easy_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="s2">&quot;instructional_level.txt&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">answer</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">instructional_level</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">answer</span><span class="p">:</span>
+                <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+                    <span class="s2">&quot;Input your instructial level: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">answer</span> <span class="o">=</span> <span class="n">easy_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="s2">&quot;instructional_level.txt&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">url</span><span class="o">.</span><span class="n">instructional_level</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+        <span class="s2">&quot;If you want see all ordering types, input yes: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">read_from_file</span><span class="p">(</span><span class="s2">&quot;orderinglist.txt&quot;</span><span class="p">))</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+        <span class="s2">&quot;Input your ordering type: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">answer</span> <span class="o">=</span> <span class="n">easy_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="s2">&quot;orderinglist.txt&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">answer</span><span class="p">:</span>
+            <span class="n">url</span><span class="o">.</span><span class="n">ordering</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">answer</span><span class="p">:</span>
+                <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+                    <span class="s2">&quot;Input your ordering type: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">answer</span> <span class="o">=</span> <span class="n">easy_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="s2">&quot;orderinglist.txt&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">url</span><span class="o">.</span><span class="n">ordering</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">url</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.0+</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,295 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>URL.url &#8212; Curs work  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for URL.url</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="URL"><a class="viewcode-back" href="../../URL.html#URL.url.URL">[docs]</a><span></span><span class="k">class</span> <span class="nc">URL</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    class that represents url class</span>
+<span class="sd">    have methods:</span>
+<span class="sd">        add_category() - add to url category of course</span>
+<span class="sd">        add_subcategory() - add to url subcategory of course</span>
+<span class="sd">        price() - add to url price</span>
+<span class="sd">        is_affiliate_agreed() - add to url true or false depend on affiliate</span>
+<span class="sd">        agreed</span>
+<span class="sd">        is_fixed_priced_deals_agreed() -  add to url true or false depend on</span>
+<span class="sd">        price</span>
+<span class="sd">        is_percentage_deals_agreed() - add to url true or false depend on price</span>
+<span class="sd">        language() - add to url setting language</span>
+<span class="sd">        has_simple_quiz() -  add to url true or false depend on simple quiz</span>
+<span class="sd">        has_closed_caption() -  add to url true or false depend on closed</span>
+<span class="sd">        caption</span>
+<span class="sd">        has_coding_exercises() - add to url true or false depend on ident</span>
+<span class="sd">        url() - return url that represent courses list</span>
+<span class="sd">        instructional_level() - check what is level of course</span>
+<span class="sd">        ordering() - check what order has course</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">=</span> <span class="s2">&quot;https://www.udemy.com/api-2.0/courses/?page_size=100&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__curriculum_url</span> <span class="o">=</span> <span class="s2">&quot;https://www.udemy.com/api-2.0/courses/</span><span class="si">{}</span><span class="se">\</span>
+<span class="s2">/public-curriculum-items/?page_size=100&quot;</span>
+
+<div class="viewcode-block" id="URL.add_category"><a class="viewcode-back" href="../../URL.html#URL.url.URL.add_category">[docs]</a>    <span class="k">def</span> <span class="nf">add_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add to url category of course</span>
+<span class="sd">        :param text: str</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot; &amp; &quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">new_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span> <span class="ow">and</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;&amp;&quot;</span> <span class="ow">and</span> <span class="n">text</span><span class="p">[</span>
+                        <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
+                        <span class="n">new_text</span> <span class="o">+=</span> <span class="s2">&quot;+%26+&quot;</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">3</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">new_text</span> <span class="o">+=</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">break</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;category=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;category=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="URL.add_subcategory"><a class="viewcode-back" href="../../URL.html#URL.url.URL.add_subcategory">[docs]</a>    <span class="k">def</span> <span class="nf">add_subcategory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add to url subcategory of course</span>
+<span class="sd">        :param text: str</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot; &amp; &quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">new_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span> <span class="ow">and</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;&amp;&quot;</span> <span class="ow">and</span> <span class="n">text</span><span class="p">[</span>
+                        <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
+                        <span class="n">new_text</span> <span class="o">+=</span> <span class="s2">&quot;+%26+&quot;</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">3</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">new_text</span> <span class="o">+=</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">break</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;subcategory=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;subcategory=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="URL.price"><a class="viewcode-back" href="../../URL.html#URL.url.URL.price">[docs]</a>    <span class="k">def</span> <span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ident</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add to url price</span>
+<span class="sd">        :param ident: bool</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ident</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;price=price-paid&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;price=price-free&quot;</span></div>
+
+<div class="viewcode-block" id="URL.is_affiliate_agreed"><a class="viewcode-back" href="../../URL.html#URL.url.URL.is_affiliate_agreed">[docs]</a>    <span class="k">def</span> <span class="nf">is_affiliate_agreed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ident</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add to url true or false depend on affiliate</span>
+<span class="sd">        :param ident: bool</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;is_affiliate_agreed=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ident</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="URL.is_fixed_priced_deals_agreed"><a class="viewcode-back" href="../../URL.html#URL.url.URL.is_fixed_priced_deals_agreed">[docs]</a>    <span class="k">def</span> <span class="nf">is_fixed_priced_deals_agreed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ident</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add to url true or false depend on price</span>
+<span class="sd">        :param ident: bool</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;is_fixed_priced_deals_agreed=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ident</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="URL.is_percentage_deals_agreed"><a class="viewcode-back" href="../../URL.html#URL.url.URL.is_percentage_deals_agreed">[docs]</a>    <span class="k">def</span> <span class="nf">is_percentage_deals_agreed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ident</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add to url true or false depend on price</span>
+<span class="sd">        :param ident: bool</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;is_percentage_deals_agreed=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ident</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="URL.language"><a class="viewcode-back" href="../../URL.html#URL.url.URL.language">[docs]</a>    <span class="k">def</span> <span class="nf">language</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add to url setting language</span>
+<span class="sd">        :param text: str</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;language=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="URL.has_simple_quiz"><a class="viewcode-back" href="../../URL.html#URL.url.URL.has_simple_quiz">[docs]</a>    <span class="k">def</span> <span class="nf">has_simple_quiz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ident</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add to url true or false depend on simple quiz</span>
+<span class="sd">        :param ident: bool</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;has_closed_caption=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ident</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="URL.has_closed_caption"><a class="viewcode-back" href="../../URL.html#URL.url.URL.has_closed_caption">[docs]</a>    <span class="k">def</span> <span class="nf">has_closed_caption</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ident</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add to url true or false depend on closed caption</span>
+<span class="sd">        :param ident: bool</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;has_coding_exercises=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ident</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="URL.has_coding_exercises"><a class="viewcode-back" href="../../URL.html#URL.url.URL.has_coding_exercises">[docs]</a>    <span class="k">def</span> <span class="nf">has_coding_exercises</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ident</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add to url true or false depend on ident</span>
+<span class="sd">        :param ident: bool</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;has_simple_quiz=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ident</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="URL.instructional_level"><a class="viewcode-back" href="../../URL.html#URL.url.URL.instructional_level">[docs]</a>    <span class="k">def</span> <span class="nf">instructional_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check what is level of course</span>
+<span class="sd">        :param text: str</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot; &amp; &quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">new_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span> <span class="ow">and</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;&amp;&quot;</span> <span class="ow">and</span> <span class="n">text</span><span class="p">[</span>
+                        <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
+                        <span class="n">new_text</span> <span class="o">+=</span> <span class="s2">&quot;+%26+&quot;</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">3</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">new_text</span> <span class="o">+=</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">break</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;instructional_level=&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;instructional_level=&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="URL.ordering"><a class="viewcode-back" href="../../URL.html#URL.url.URL.ordering">[docs]</a>    <span class="k">def</span> <span class="nf">ordering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check what order has course</span>
+<span class="sd">        :param text: str</span>
+<span class="sd">        :return: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot; &amp; &quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">new_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span> <span class="ow">and</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;&amp;&quot;</span> <span class="ow">and</span> <span class="n">text</span><span class="p">[</span>
+                        <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
+                        <span class="n">new_text</span> <span class="o">+=</span> <span class="s2">&quot;+%26+&quot;</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">3</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">new_text</span> <span class="o">+=</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">break</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;ordering=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">+=</span> <span class="s2">&quot;&amp;ordering=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="URL.url"><a class="viewcode-back" href="../../URL.html#URL.url.URL.url">[docs]</a>    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return url</span>
+<span class="sd">        :return: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__url</span></div></div>
+
+
+<div class="viewcode-block" id="curriculum_url"><a class="viewcode-back" href="../../URL.html#URL.url.curriculum_url">[docs]</a><span class="k">class</span> <span class="nc">curriculum_url</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    class that represent curriculum url.Have methods:</span>
+<span class="sd">        curriculum_url() - return url that represents curriculum list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__curriculum_url</span> <span class="o">=</span> <span class="s2">&quot;https://www.udemy.com/api-2.0/courses/</span><span class="si">{}</span><span class="se">\</span>
+<span class="s2">/public-curriculum-items/?page_size=100&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+
+<div class="viewcode-block" id="curriculum_url.currric_url"><a class="viewcode-back" href="../../URL.html#URL.url.curriculum_url.currric_url">[docs]</a>    <span class="k">def</span> <span class="nf">currric_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return url that represents curriculum list</span>
+<span class="sd">        :return: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__curriculum_url</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.0+</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
