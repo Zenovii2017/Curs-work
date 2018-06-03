@@ -11,3 +11,5 @@ Firstly, the method of data analysis using udemy API is not accurate, because wh
 Secondly, the built-in method works for a long time, at least 3 minutes, since in 40 seconds only ten requests can be sent. Also, some losses are possible, as, for the program optimization problem, the program can check 30 courses.
 
 If you want a quick check, choose the first method, if you want a precise check, then choose the second method.
+
+If you notice a couple of times that you need to wait 50 seconds, it's best to restart the program because it could get stuck.
