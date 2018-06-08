@@ -1,4 +1,5 @@
 Easy Study
+
 WARNING!
 The program can be reworked.
 
